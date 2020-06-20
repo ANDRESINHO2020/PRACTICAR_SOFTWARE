@@ -1,0 +1,19 @@
+
+<?php
+
+class Controlador {
+
+    public function verPagina($ruta) {
+        require_once $ruta;
+    }
+
+    public function agregarCita($doc, $med, $fec, $hor, $con) {
+        $cita = new Cita(null, $fec, $hor, $doc, $med, $con, "3",
+                "null");
+        $gestorCita = new GestorCita();
+        $id = $gestorCita->agregarCita($cita);
+        $result = $gestorCita->consultarCitaPorId($id);
+        require_once 'Vista/html/confirmarCita.php';
+    }
+
+}
